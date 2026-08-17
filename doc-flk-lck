@@ -1,0 +1,37 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+		/* exact timestamp of the nixpkgs commit used
+			ensures everyone gets the exact same packages */
+        "lastModified": 1735563628,
+		/* cryptographic hash of the downloaded content
+			Nix verifies this to guarantee integrity */
+        "narHash": "sha256-OnSAY7XDSx7CtDoqNh8jwVwh4xNL/2HaJxGjryLWzX8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+		/* exact git commit hash of nixpkgs that is locked
+			this is what makes the environment fully reproducible */
+        "rev": "b134951a4c9f3c995fd7be05f3243f8ecd65d798",
+        "type": "github"
+      },
+      "original": {
+		/* what you wrote in flake.nix - the human-readable reference */
+        "owner": "nixos",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+		/* declares that the root flake depends on nixpkgs */
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  /* entry point of the lock graph */
+  "root": "root",
+  /* lock file format version */
+  "version": 7
+}
