@@ -20,9 +20,11 @@ typedef enum {
 	VGA_BRIGHT_WHITE = 15,
 } vga_color_t;
 
-void			vga_putchar(char c, unsigned char color, int x, int y);
-void			vga_putstr(char *str, unsigned char color, int x, int y);
+void			vga_putchar(char c, unsigned char color);
+void			vga_putstr(char *str, unsigned char color);
 
 unsigned char	vga_color(vga_color_t foregroung, vga_color_t background);
+
+void	vga_update_cursor(int x, int y);
 
 #endif
