@@ -7,6 +7,18 @@ int				cursor_y = 0;
 
 void vga_putchar(char c, unsigned char color)
 {
+	if (c == '\n')
+	{
+		cursor_x = 0;
+		cursor_y++;
+		if (cursor_y == 25)
+		{
+			vga_scroll();
+		}
+		vga_update_cursor(cursor_x, cursor_y);
+		return ;
+	}
+
 	unsigned short entry = (color << 8) | c;
 	vga[cursor_y * 80 + cursor_x] = entry;
 	
@@ -15,6 +27,10 @@ void vga_putchar(char c, unsigned char color)
 	{
 		cursor_y++;
 		cursor_x = 0;
+	}
+	if (cursor_y == 25)
+	{
+		vga_scroll();
 	}
 	vga_update_cursor(cursor_x, cursor_y);
 }
@@ -44,4 +60,18 @@ void	vga_update_cursor(int x, int y)
 
 	outb(0x3D4, 0x0F);
 	outb(0x3D5, position & 0xFF);
+}
+
+void	vga_scroll(void)
+{
+	int n = 24 * 80 * 2;
+
+	memcpy(vga, vga + 80, n);
+	int i = 0;
+	while (i < 80)
+	{
+		vga[24 * 80 + i] = (vga_color(VGA_BRIGHT_WHITE, VGA_BLACK) << 8) | ' ';
+		i++;
+	}
+	cursor_y = 24;
 }
