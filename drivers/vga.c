@@ -2,8 +2,9 @@
 #include "io.h"
 
 unsigned short	*vga = (unsigned short *)0xB8000;
-int				cursor_x = 0;
-int				cursor_y = 0;
+int				cursor_x;
+int				cursor_y;
+unsigned char	current_color;
 
 void vga_putchar(char c, unsigned char color)
 {
@@ -74,4 +75,11 @@ void	vga_scroll(void)
 		i++;
 	}
 	cursor_y = 24;
+}
+
+void	vga_init(vga_color_t foreground, vga_color_t background)
+{
+	current_color = vga_color(foreground, background);
+	cursor_x = 0;
+	cursor_y = 0;
 }
