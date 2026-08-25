@@ -1,6 +1,8 @@
 #ifndef VGA_H
 #define VGA_H
 
+extern unsigned char current_color;
+
 typedef enum {
 	VGA_BLACK = 0,
 	VGA_BLUE = 1,
@@ -26,5 +28,7 @@ void			vga_putstr(char *str, unsigned char color);
 unsigned char	vga_color(vga_color_t foregroung, vga_color_t background);
 
 void	vga_update_cursor(int x, int y);
+
+void	vga_init(vga_color_t foreground, vga_color_t background);
 
 #endif
