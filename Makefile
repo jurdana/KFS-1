@@ -8,6 +8,9 @@ CFLAGS    = -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs -I includ
 C_SRCS    =	drivers/vga.c \
 			kernel/kmain.c \
 			lib/lib.c \
+			lib/printk.c \
+			lib/printk_utils.c \
+			lib/printk_utils2.c \
 
 ASM_SRCS  = boot/boot.asm
 
