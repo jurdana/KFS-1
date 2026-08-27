@@ -14,6 +14,15 @@ void	keyboard_handler(void)
 {
 	unsigned char scancode = inb(0x60);
 
+	if (scancode == 0x3B)
+		switch_screen(0);
+	else if (scancode == 0x3C)
+		switch_screen(1);
+	else if (scancode == 0x3D)
+		switch_screen(2);
+	else if (scancode == 0x3E)
+		switch_screen(3);
+
 	if (scancode < sizeof(keymap))
 	{
 		char c = keymap[scancode];
