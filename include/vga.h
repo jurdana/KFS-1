@@ -31,4 +31,6 @@ void	vga_update_cursor(int x, int y);
 
 void	vga_init(vga_color_t foreground, vga_color_t background);
 
+void	switch_screen(int n);
+
 #endif
