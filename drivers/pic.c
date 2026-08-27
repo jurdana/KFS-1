@@ -1,3 +1,5 @@
+#include "io.h"
+
 void	pic_init(void)
 {
 	outb(0x20, 0x11);
