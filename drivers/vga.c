@@ -1,6 +1,11 @@
 #include "vga.h"
 #include "io.h"
 
+unsigned short	*screens[4][80 * 25];
+int				current_screen = 0;
+int				screens_x[4];
+int				screens_y[4];
+
 unsigned short	*vga = (unsigned short *)0xB8000;
 int				cursor_x;
 int				cursor_y;
@@ -82,4 +87,20 @@ void	vga_init(vga_color_t foreground, vga_color_t background)
 	current_color = vga_color(foreground, background);
 	cursor_x = 0;
 	cursor_y = 0;
+	outb(0x3D4, 0x0A);
+	outb(0x3D5, (inb(0x3D5) & 0xC0) | 14);
+	outb(0x3D4, 0x0B);
+	outb(0x3D5, (inb(0x3D5) & 0xE0) | 15);
+}
+
+void	switch_screen(int n)
+{
+	memcpy(screens[current_screen], vga, 80 * 25 *2);
+	screens_x[current_screen] = cursor_x;
+	screens_y[current_screen] = cursor_y;
+	current_screen = n;
+	cursor_x = screens_x[current_screen];
+	cursor_y = screens_y[current_screen];
+	memcpy(vga, screens[current_screen], 80 * 25 *2);
+	vga_update_cursor(cursor_x, cursor_y);
 }
