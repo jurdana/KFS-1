@@ -6,6 +6,9 @@ ASM       = nasm
 CFLAGS    = -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs -I include
 
 C_SRCS    =	drivers/vga.c \
+			drivers/idt.c \
+			drivers/pic.c \
+			drivers/keyboard.c \
 			kernel/kmain.c \
 			lib/lib.c \
 			lib/printk.c \
