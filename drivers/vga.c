@@ -1,7 +1,7 @@
 #include "vga.h"
 #include "io.h"
 
-unsigned short	*screens[4][80 * 25];
+unsigned short	screens[4][80 * 25];
 int				current_screen = 0;
 int				screens_x[4];
 int				screens_y[4];
@@ -87,6 +87,19 @@ void	vga_init(vga_color_t foreground, vga_color_t background)
 	current_color = vga_color(foreground, background);
 	cursor_x = 0;
 	cursor_y = 0;
+
+	int s = 0;
+    while (s < 4)
+    {
+        int i = 0;
+        while (i < 80 * 25)
+        {
+            screens[s][i] = (current_color << 8) | ' ';
+            i++;
+        }
+        s++;
+    }
+
 	outb(0x3D4, 0x0A);
 	outb(0x3D5, (inb(0x3D5) & 0xC0) | 14);
 	outb(0x3D4, 0x0B);
