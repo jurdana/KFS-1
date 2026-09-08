@@ -17,7 +17,7 @@
       # pkgsCross.i686-embedded : selects the i686 embedded target
       # buildPackages.gcc       :gets the GCC compiler for that target
       # produces the i686-elf-gcc binary used to compile the kernel
-      crossGcc = nixpkgs.legacyPackages.x86_64-linux.pkgsCross.i686-embedded.buildPackages.gcc;
+      crossGcc = pkgs.pkgsCross.i686-embedded.buildPackages.gcc;
     in
     {
       # defines the default development shell for x86_64-linux
